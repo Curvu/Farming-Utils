@@ -15,7 +15,7 @@ public class RegisterKeyBind {
   public RegisterKeyBind(String name, int defaultKeyCode) {
     this.name = name;
     this.defaultKeyCode = defaultKeyCode;
-    keyBinding = new KeyBinding("key.farmingutils."+name, this.getDefaultKeyCode(), "category."+NAME);
+    keyBinding = new KeyBinding(name, this.getDefaultKeyCode(), NAME);
   }
 
   /**
