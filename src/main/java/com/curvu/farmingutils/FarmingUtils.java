@@ -10,10 +10,11 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 public class FarmingUtils {
   public static final String MODID = "farmingutils";
   public static final String NAME = "FarmingUtils";
-  public static final String VERSION = "1.0.0";
+  public static final String VERSION = "1.1.0";
 
   @EventHandler
   public void init(FMLInitializationEvent event) {
+    // Register the event listener for features
     MinecraftForge.EVENT_BUS.register(new FeatureListener());
   }
 }
