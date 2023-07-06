@@ -6,7 +6,7 @@
     "version": "${version}",
     "mcversion": "${mcversion}",
     "url": "https://github.com/Curvu/Farming-Utils",
-    "updateUrl": "",
+    "updateUrl": "https://github.com/Cephetir/SkySkipped/releases/latest",
     "authorList": ["Curvu"],
     "credits": "",
     "logoFile": "",

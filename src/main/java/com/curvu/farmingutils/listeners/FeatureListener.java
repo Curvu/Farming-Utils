@@ -71,7 +71,7 @@ public class FeatureListener {
   public void onPitchChanging(KeyInputEvent event) {
     for (RegisterKeyBind key : keyBindings) {
       // if index of the bind 2+yaws.length, it means that the key binding is not a pitch key binding
-      if (keyBindings.indexOf(key) < 2+yaws.length) continue;
+      if (keyBindings.indexOf(key) < 10) continue;
 
       // if the key is pressed, change the pitch of the player
       if (key.isPressed()) featureYawPitch.setPitch(pitches[keyBindings.indexOf(key) - 10]); // TODO: CHANGE THIS SO YOU CAN CONFIGURE THE PITCH IN THE GUI
