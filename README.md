@@ -1,5 +1,5 @@
 # Features
-- Full sized crops (wheat, potatos, carrots, nether_wart, cocoa beans)
+- Full sized crops (mushrooms, nether_wart, carrot, potato, wheat, ~cocoa beans~)
 - Auto yaw
 - Auto pitch
 - Toggle sneak
