@@ -1,5 +1,6 @@
 package com.curvu.farmingutils.listeners;
 
+import com.curvu.farmingutils.features.ToggleMovementFeature;
 import com.curvu.farmingutils.features.ToggleSneakFeature;
 import com.curvu.farmingutils.features.ToggleLeftClickFeature;
 import com.curvu.farmingutils.features.YawPitchFeature;
@@ -20,22 +21,24 @@ import java.util.List;
 public class FeatureListener {
   private final List<RegisterKeyBind> keyBindings = new ArrayList<RegisterKeyBind>();
   private final YawPitchFeature featureYawPitch = new YawPitchFeature();
-  private final float[] yaws = new float[]{0, 45, 90, 135, 180, -45, -90, -135};
-  private final float[] pitches = new float[]{0, 26, -45};
-
   private final ToggleLeftClickFeature toggleLeftClickFeature = new ToggleLeftClickFeature();
-
   private final ToggleSneakFeature toggleSneakFeature = new ToggleSneakFeature();
+  private final ToggleMovementFeature toggleMovementFeature = new ToggleMovementFeature();
 
   public FeatureListener() {
     init();
   }
 
   private void init() {
-    keyBindings.add(new RegisterKeyBind("toggle_left_click", Keyboard.KEY_RETURN));
-    keyBindings.add(new RegisterKeyBind("toggle_sneak", Keyboard.KEY_NONE));
-    for (Float yaw : yaws) keyBindings.add(new RegisterKeyBind("yaw:"+yaw, Keyboard.KEY_NONE));
-    for (Float pitch : pitches) keyBindings.add(new RegisterKeyBind("pitch:"+pitch, Keyboard.KEY_NONE));
+    keyBindings.add(new RegisterKeyBind("Toggle Left Click", Keyboard.KEY_RETURN));
+    keyBindings.add(new RegisterKeyBind("Toggle Sneak", Keyboard.KEY_NONE));
+    keyBindings.add(new RegisterKeyBind("Toggle Walk Left", Keyboard.KEY_LEFT));
+    keyBindings.add(new RegisterKeyBind("Toggle Walk Right", Keyboard.KEY_RIGHT));
+    keyBindings.add(new RegisterKeyBind("0º Yaw", Keyboard.KEY_NUMPAD5));
+    keyBindings.add(new RegisterKeyBind("180º Yaw", Keyboard.KEY_NUMPAD2));
+    keyBindings.add(new RegisterKeyBind("0º Pitch", Keyboard.KEY_NUMPAD6));
+    keyBindings.add(new RegisterKeyBind("26º Pitch", Keyboard.KEY_NUMPAD3));
+    keyBindings.add(new RegisterKeyBind("-45º Pitch", Keyboard.KEY_NUMPAD9));
 
     // register all key bindings
     for (RegisterKeyBind keyBinding : keyBindings) keyBinding.register();
@@ -49,48 +52,16 @@ public class FeatureListener {
     return keyBindings;
   }
 
-  /**
-   * Handle the event to change the yaw of the player
-   */
   @SubscribeEvent
-  public void onYawChanging(KeyInputEvent event) {
-    System.out.println("onYawChanging");
-    for (RegisterKeyBind key : keyBindings) {
-      // if index of the bind <2, it means that the key binding is not a yaw key binding
-      if (keyBindings.indexOf(key) < 2) return;
-
-      // if the key is pressed, change the yaw of the player
-      if (key.isPressed()) featureYawPitch.setYaw(yaws[keyBindings.indexOf(key) - 2]); // TODO: CHANGE THIS SO YOU CAN CONFIGURE THE YAW IN THE GUI
-    }
-  }
-
-  /**
-   * Handle the event to change the pitch of the player
-   */
-  @SubscribeEvent
-  public void onPitchChanging(KeyInputEvent event) {
-    for (RegisterKeyBind key : keyBindings) {
-      // if index of the bind 2+yaws.length, it means that the key binding is not a pitch key binding
-      if (keyBindings.indexOf(key) < 2+yaws.length) continue;
-
-      // if the key is pressed, change the pitch of the player
-      if (key.isPressed()) featureYawPitch.setPitch(pitches[keyBindings.indexOf(key) - 10]); // TODO: CHANGE THIS SO YOU CAN CONFIGURE THE PITCH IN THE GUI
-    }
-  }
-
-  /**
-   * Handle the event to toggle the left click
-   */
-  @SubscribeEvent
-  public void onLeftClickToggling(KeyInputEvent event) {
+  public void onEvent(KeyInputEvent event) {
     if (keyBindings.get(0).isPressed()) toggleLeftClickFeature.toggle();
-  }
-
-  /**
-   * Handle the event to toggle the sneak
-   */
-  @SubscribeEvent
-  public void onSneakToggling(KeyInputEvent event) {
     if (keyBindings.get(1).isPressed()) toggleSneakFeature.toggle();
+    if (keyBindings.get(2).isPressed()) toggleMovementFeature.toggleLeft();
+    if (keyBindings.get(3).isPressed()) toggleMovementFeature.toggleRight();
+    if (keyBindings.get(4).isPressed()) featureYawPitch.setYaw(0);
+    if (keyBindings.get(5).isPressed()) featureYawPitch.setYaw(180);
+    if (keyBindings.get(6).isPressed()) featureYawPitch.setPitch(0);
+    if (keyBindings.get(7).isPressed()) featureYawPitch.setPitch(26);
+    if (keyBindings.get(8).isPressed()) featureYawPitch.setPitch(-45);
   }
 }
