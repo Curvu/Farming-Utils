@@ -5,7 +5,6 @@ import net.minecraft.block.*;
 import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
-import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
@@ -15,13 +14,11 @@ import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
-import java.lang.reflect.Field;
-
 @Mod(modid = FarmingUtils.MODID, name = FarmingUtils.NAME, version = FarmingUtils.VERSION)
 public class FarmingUtils {
   public static final String MODID = "farmingutils";
   public static final String NAME = "FarmingUtils";
-  public static final String VERSION = "1.1.2";
+  public static final String VERSION = "1.1.3";
 
   @Mod.Instance
   public static FarmingUtils main;

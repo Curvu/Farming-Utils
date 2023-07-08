@@ -23,4 +23,18 @@ public class ToggleMovementFeature {
   public void toggleRight() {
     KeyBinding.setKeyBindState(mc.gameSettings.keyBindRight.getKeyCode(), !mc.gameSettings.keyBindRight.isKeyDown());
   }
+
+  /**
+   * Toggle Forward
+   */
+  public void toggleForward() {
+    KeyBinding.setKeyBindState(mc.gameSettings.keyBindForward.getKeyCode(), !mc.gameSettings.keyBindForward.isKeyDown());
+  }
+
+  /**
+   * Toggle Back
+   */
+  public void toggleBackward() {
+    KeyBinding.setKeyBindState(mc.gameSettings.keyBindBack.getKeyCode(), !mc.gameSettings.keyBindBack.isKeyDown());
+  }
 }

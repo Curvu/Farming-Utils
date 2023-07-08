@@ -34,10 +34,14 @@ public class FeatureListener {
     keyBindings.add(new RegisterKeyBind("Toggle Sneak", Keyboard.KEY_NONE));
     keyBindings.add(new RegisterKeyBind("Toggle Walk Left", Keyboard.KEY_LEFT));
     keyBindings.add(new RegisterKeyBind("Toggle Walk Right", Keyboard.KEY_RIGHT));
+    keyBindings.add(new RegisterKeyBind("Toggle Walk Forward", Keyboard.KEY_UP));
+    keyBindings.add(new RegisterKeyBind("Toggle Walk Backward", Keyboard.KEY_DOWN));
     keyBindings.add(new RegisterKeyBind("0º Yaw", Keyboard.KEY_NUMPAD5));
+    keyBindings.add(new RegisterKeyBind("90º Yaw", Keyboard.KEY_NUMPAD8));
+    keyBindings.add(new RegisterKeyBind("135º Yaw", Keyboard.KEY_NUMPAD4));
     keyBindings.add(new RegisterKeyBind("180º Yaw", Keyboard.KEY_NUMPAD2));
     keyBindings.add(new RegisterKeyBind("0º Pitch", Keyboard.KEY_NUMPAD6));
-    keyBindings.add(new RegisterKeyBind("26º Pitch", Keyboard.KEY_NUMPAD3));
+    keyBindings.add(new RegisterKeyBind("27º Pitch", Keyboard.KEY_NUMPAD3));
     keyBindings.add(new RegisterKeyBind("-45º Pitch", Keyboard.KEY_NUMPAD9));
 
     // register all key bindings
@@ -58,10 +62,14 @@ public class FeatureListener {
     if (keyBindings.get(1).isPressed()) toggleSneakFeature.toggle();
     if (keyBindings.get(2).isPressed()) toggleMovementFeature.toggleLeft();
     if (keyBindings.get(3).isPressed()) toggleMovementFeature.toggleRight();
-    if (keyBindings.get(4).isPressed()) featureYawPitch.setYaw(0);
-    if (keyBindings.get(5).isPressed()) featureYawPitch.setYaw(180);
-    if (keyBindings.get(6).isPressed()) featureYawPitch.setPitch(0);
-    if (keyBindings.get(7).isPressed()) featureYawPitch.setPitch(26);
-    if (keyBindings.get(8).isPressed()) featureYawPitch.setPitch(-45);
+    if (keyBindings.get(4).isPressed()) toggleMovementFeature.toggleForward();
+    if (keyBindings.get(5).isPressed()) toggleMovementFeature.toggleBackward();
+    if (keyBindings.get(6).isPressed()) featureYawPitch.setYaw(0);
+    if (keyBindings.get(7).isPressed()) featureYawPitch.setYaw(90);
+    if (keyBindings.get(8).isPressed()) featureYawPitch.setYaw(135);
+    if (keyBindings.get(9).isPressed()) featureYawPitch.setYaw(180);
+    if (keyBindings.get(10).isPressed()) featureYawPitch.setPitch(0);
+    if (keyBindings.get(11).isPressed()) featureYawPitch.setPitch(27);
+    if (keyBindings.get(12).isPressed()) featureYawPitch.setPitch(-45);
   }
 }
