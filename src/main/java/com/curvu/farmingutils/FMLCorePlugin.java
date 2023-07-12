@@ -1,6 +1,6 @@
 package com.curvu.farmingutils;
 
-import com.curvu.farmingutils.render.ClassTransformer;
+import com.curvu.farmingutils.misc.ClassTransformer;
 import net.minecraftforge.fml.relauncher.IFMLLoadingPlugin;
 
 import java.util.Map;

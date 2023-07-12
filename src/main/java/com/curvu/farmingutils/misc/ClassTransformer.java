@@ -1,4 +1,4 @@
-package com.curvu.farmingutils.render;
+package com.curvu.farmingutils.misc;
 
 import com.curvu.farmingutils.FarmingUtils;
 import net.minecraft.block.BlockBush;
@@ -29,8 +29,7 @@ public class ClassTransformer implements IClassTransformer {
     list.add(new MethodInsnNode(Opcodes.INVOKEVIRTUAL, mainClass, "extendHitbox", "(Lnet/minecraft/world/World;Lnet/minecraft/util/BlockPos;)V", false));
   }
 
-  public MethodNode getSelectedBoundingBox(){
-    //What's ASM?
+  public MethodNode getSelectedBoundingBox() {
     MethodNode mn = new MethodNode(Opcodes.ACC_PUBLIC, getRemappedMethodName("getSelectedBoundingBox"), "(Lnet/minecraft/world/World;Lnet/minecraft/util/BlockPos;)Lnet/minecraft/util/AxisAlignedBB;", null, null);
 
     InsnList list =  mn.instructions;
@@ -44,13 +43,12 @@ public class ClassTransformer implements IClassTransformer {
     return mn;
   }
 
-  public MethodNode collisionRayTrace(){
+  public MethodNode collisionRayTrace() {
     //What's ASM?
     MethodNode mn = new MethodNode(Opcodes.ACC_PUBLIC, getRemappedMethodName("collisionRayTrace"), "(Lnet/minecraft/world/World;Lnet/minecraft/util/BlockPos;Lnet/minecraft/util/Vec3;Lnet/minecraft/util/Vec3;)Lnet/minecraft/util/MovingObjectPosition;", null, null);
 
     InsnList list =  mn.instructions;
     injectExtendHitboxMethod(list);
-
 
     list.add(new VarInsnNode(Opcodes.ALOAD, 0));
     list.add(new VarInsnNode(Opcodes.ALOAD, 1));
@@ -64,23 +62,22 @@ public class ClassTransformer implements IClassTransformer {
 
   @Override
   public byte[] transform(String name, String transformedName, byte[] basicClass) {
-    if (basicClass == null) {
-      return null;
-    }
+    if (basicClass == null) return null;
+    if (!(transformedName.equals("net.minecraft.block.BlockNetherWart") || transformedName.equals("net.minecraft.block.BlockCrops"))) return basicClass;
 
-    if(transformedName.equals("net.minecraft.block.BlockNetherWart") || transformedName.equals("net.minecraft.block.BlockCrops")) {
-      ClassReader classReader = new ClassReader(basicClass);
-      ClassNode classNode = new ClassNode();
-      classReader.accept(classNode, ClassReader.EXPAND_FRAMES);
+    ClassReader classReader = new ClassReader(basicClass);
+    ClassNode classNode = new ClassNode();
+    classReader.accept(classNode, ClassReader.EXPAND_FRAMES);
 
+    if (transformedName.equals("net.minecraft.block.BlockCocoa")) {
 
+    } else {
       classNode.methods.add(getSelectedBoundingBox());
       classNode.methods.add(collisionRayTrace());
-
-      ClassWriter writer = new ClassWriter(ClassWriter.COMPUTE_MAXS | ClassWriter.COMPUTE_FRAMES);
-      classNode.accept(writer);
-      return writer.toByteArray();
     }
-    return basicClass;
+
+    ClassWriter writer = new ClassWriter(ClassWriter.COMPUTE_MAXS | ClassWriter.COMPUTE_FRAMES);
+    classNode.accept(writer);
+    return writer.toByteArray();
   }
 }
