@@ -2,14 +2,16 @@ buildscript {
     repositories {
         jcenter()
         maven { url 'https://files.minecraftforge.net/maven' }
+        maven { url 'https://repo.spongepowered.org/maven' }
     }
     dependencies {
         classpath 'net.minecraftforge.gradle:ForgeGradle:2.1-SNAPSHOT'
+        classpath 'org.spongepowered:mixingradle:0.6-SNAPSHOT'
     }
 }
 
 apply plugin: 'net.minecraftforge.gradle.forge'
-
+apply plugin: 'org.spongepowered.mixin'
 
 version = '1.1.3'
 group= 'com.curvu.farmingutils'
@@ -24,13 +26,33 @@ minecraft {
     mappings = 'stable_20'
 }
 
+configurations {
+    shade
+    compile.extendsFrom(shade)
+}
+
+repositories {
+    maven { url 'https://repo.spongepowered.org/maven/' }
+}
+
 jar {
     manifest {
         attributes([
-            "FMLCorePluginContainsFMLMod": "Yes",
-            "ModSide": "CLIENT",
-            "FMLCorePlugin": "com.curvu.farmingutils.FMLCorePlugin"
+            'FMLCorePluginContainsFMLMod': 'Yes',
+            'ModSide': 'CLIENT',
+            'FMLCorePlugin': 'com.curvu.farmingutils.FMLCorePlugin',
+            'MixinConfigs': 'mixins.farmingutils.json'
         ])
+    }
+}
+
+dependencies {
+    shade('org.spongepowered:mixin:0.7.10-SNAPSHOT') {
+        exclude module: 'launchwrapper'
+        exclude module: 'guava'
+        exclude module: 'gson'
+        exclude module: 'commons-io'
+        exclude module: 'log4j-core'
     }
 }
 
@@ -50,5 +72,17 @@ processResources {
     // copy everything else, thats not the mcmod.info
     from(sourceSets.main.resources.srcDirs) {
         exclude 'mcmod.info'
+    }
+}
+
+jar {
+    manifest {
+        from 'META-INF/MANIFEST.MF'
+    }
+}
+
+sourceSets {
+    main {
+        ext.refMap = "mixins.farmingutils.refmap.json"
     }
 }

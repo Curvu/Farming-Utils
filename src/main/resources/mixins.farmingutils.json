@@ -1,0 +1,13 @@
+{
+  "required": true,
+  "minVersion": "0.7",
+  "package": "com.curvu.farmingutils.mixins",
+  "refmap": "mixins.farmingutils.refmap.json",
+  "compatibilityLevel": "JAVA_8",
+  "client": [
+    "MixinBlockCocoa"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
