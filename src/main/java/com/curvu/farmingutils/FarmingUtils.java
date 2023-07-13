@@ -18,7 +18,7 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 public class FarmingUtils {
   public static final String MODID = "farmingutils";
   public static final String NAME = "FarmingUtils";
-  public static final String VERSION = "1.1.3";
+  public static final String VERSION = "1.1.4";
 
   @Mod.Instance
   public static FarmingUtils main;
