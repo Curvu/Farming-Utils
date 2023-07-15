@@ -1,11 +1,7 @@
 package com.curvu.farmingutils.listeners;
 
-import com.curvu.farmingutils.features.ToggleMovementFeature;
-import com.curvu.farmingutils.features.ToggleSneakFeature;
-import com.curvu.farmingutils.features.ToggleLeftClickFeature;
-import com.curvu.farmingutils.features.YawPitchFeature;
+import com.curvu.farmingutils.features.*;
 import com.curvu.farmingutils.misc.RegisterKeyBind;
-
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.InputEvent.KeyInputEvent;
 import org.lwjgl.input.Keyboard;
@@ -24,6 +20,7 @@ public class FeatureListener {
   private final ToggleLeftClickFeature toggleLeftClickFeature = new ToggleLeftClickFeature();
   private final ToggleSneakFeature toggleSneakFeature = new ToggleSneakFeature();
   private final ToggleMovementFeature toggleMovementFeature = new ToggleMovementFeature();
+  private final UnFocusGameFeature unFocusGameFeature = new UnFocusGameFeature();
 
   public FeatureListener() {
     init();
@@ -43,6 +40,7 @@ public class FeatureListener {
     keyBindings.add(new RegisterKeyBind("0º Pitch", Keyboard.KEY_NUMPAD6));
     keyBindings.add(new RegisterKeyBind("27º Pitch", Keyboard.KEY_NUMPAD3));
     keyBindings.add(new RegisterKeyBind("-45º Pitch", Keyboard.KEY_NUMPAD9));
+    keyBindings.add(new RegisterKeyBind("Un-focus Game", Keyboard.KEY_P));
 
     // register all key bindings
     for (RegisterKeyBind keyBinding : keyBindings) keyBinding.register();
@@ -71,5 +69,6 @@ public class FeatureListener {
     if (keyBindings.get(10).isPressed()) featureYawPitch.setPitch(0);
     if (keyBindings.get(11).isPressed()) featureYawPitch.setPitch(27);
     if (keyBindings.get(12).isPressed()) featureYawPitch.setPitch(-45);
+    if (keyBindings.get(13).isPressed()) unFocusGameFeature.unFocusGame();
   }
 }
