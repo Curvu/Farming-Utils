@@ -14,6 +14,8 @@ import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
+// TODO: BIND TO KEEP PLAYING BUT UN-FOCUS MINECRAFT
+
 @Mod(modid = FarmingUtils.MODID, name = FarmingUtils.NAME, version = FarmingUtils.VERSION)
 public class FarmingUtils {
   public static final String MODID = "farmingutils";
