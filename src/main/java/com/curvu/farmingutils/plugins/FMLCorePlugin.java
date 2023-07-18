@@ -1,4 +1,4 @@
-package com.curvu.farmingutils;
+package com.curvu.farmingutils.plugins;
 
 import com.curvu.farmingutils.misc.ClassTransformer;
 import net.minecraftforge.fml.relauncher.IFMLLoadingPlugin;

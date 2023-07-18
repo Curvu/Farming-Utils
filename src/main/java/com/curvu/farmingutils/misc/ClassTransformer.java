@@ -69,12 +69,8 @@ public class ClassTransformer implements IClassTransformer {
     ClassNode classNode = new ClassNode();
     classReader.accept(classNode, ClassReader.EXPAND_FRAMES);
 
-    if (transformedName.equals("net.minecraft.block.BlockCocoa")) {
-
-    } else {
-      classNode.methods.add(getSelectedBoundingBox());
-      classNode.methods.add(collisionRayTrace());
-    }
+    classNode.methods.add(getSelectedBoundingBox());
+    classNode.methods.add(collisionRayTrace());
 
     ClassWriter writer = new ClassWriter(ClassWriter.COMPUTE_MAXS | ClassWriter.COMPUTE_FRAMES);
     classNode.accept(writer);
