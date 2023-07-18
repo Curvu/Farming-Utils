@@ -32,6 +32,7 @@ public class YawPitchFeature {
 
   /**
    * Get the current yaw and pitch of the player.
+   * @return An array of size 2 containing the yaw and pitch of the player.
    */
   public float[] getYawPitch() {
     return new float[]{ this.mc.thePlayer.rotationYaw, this.mc.thePlayer.rotationPitch };

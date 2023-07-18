@@ -1,5 +1,6 @@
 package com.curvu.farmingutils;
 
+import com.curvu.farmingutils.features.UngrabFeature;
 import com.curvu.farmingutils.listeners.FeatureListener;
 import net.minecraft.block.*;
 import net.minecraft.block.properties.PropertyInteger;
@@ -58,6 +59,7 @@ public class FarmingUtils {
   public void init(FMLInitializationEvent event) {
     MinecraftForge.EVENT_BUS.register(this);
     MinecraftForge.EVENT_BUS.register(new FeatureListener());
+    MinecraftForge.EVENT_BUS.register(new UngrabFeature());
 
     Blocks.brown_mushroom.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
     Blocks.red_mushroom.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);

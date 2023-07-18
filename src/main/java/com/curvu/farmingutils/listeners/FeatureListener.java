@@ -20,7 +20,7 @@ public class FeatureListener {
   private final ToggleLeftClickFeature toggleLeftClickFeature = new ToggleLeftClickFeature();
   private final ToggleSneakFeature toggleSneakFeature = new ToggleSneakFeature();
   private final ToggleMovementFeature toggleMovementFeature = new ToggleMovementFeature();
-  private final UnFocusGameFeature unFocusGameFeature = new UnFocusGameFeature();
+  private final UngrabFeature unGrabFeature = new UngrabFeature();
 
   public FeatureListener() {
     init();
@@ -69,6 +69,6 @@ public class FeatureListener {
     if (keyBindings.get(10).isPressed()) featureYawPitch.setPitch(0);
     if (keyBindings.get(11).isPressed()) featureYawPitch.setPitch(27);
     if (keyBindings.get(12).isPressed()) featureYawPitch.setPitch(-45);
-    if (keyBindings.get(13).isPressed()) unFocusGameFeature.unFocusGame();
+    if (keyBindings.get(13).isPressed()) unGrabFeature.ungrabMouse();
   }
 }
