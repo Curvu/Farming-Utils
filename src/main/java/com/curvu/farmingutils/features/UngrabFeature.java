@@ -1,33 +1,30 @@
 package com.curvu.farmingutils.features;
 
-import org.lwjgl.input.Mouse;
+import com.curvu.farmingutils.FarmingUtils;
 import net.minecraft.util.MouseHelper;
-import net.minecraft.client.Minecraft;
+import org.lwjgl.input.Mouse;
 
 /**
  * Un-focus the game window (keeping the game running normally in the background)
  */
 public class UngrabFeature {
-  private static Minecraft mc;
   public static boolean isUngrabbed;
   private static MouseHelper oldMouseHelper;
   private static boolean doesGameWantUngrab;
 
-
   public static void ungrabMouse() {
-    if (!UngrabFeature.mc.inGameHasFocus || UngrabFeature.isUngrabbed) {
+    if (!FarmingUtils.mc.inGameHasFocus || UngrabFeature.isUngrabbed) {
       regrabMouse(); //TODO - this will not be needed in the future
       return;
     }
 
-    if (UngrabFeature.oldMouseHelper == null) {
-      UngrabFeature.oldMouseHelper = UngrabFeature.mc.mouseHelper;
-    }
-    UngrabFeature.mc.gameSettings.pauseOnLostFocus = false;
+    if (UngrabFeature.oldMouseHelper == null) UngrabFeature.oldMouseHelper = FarmingUtils.mc.mouseHelper;
+
+    FarmingUtils.mc.gameSettings.pauseOnLostFocus = false;
     UngrabFeature.doesGameWantUngrab = !Mouse.isGrabbed();
     UngrabFeature.oldMouseHelper.ungrabMouseCursor();
-    UngrabFeature.mc.inGameHasFocus = true;
-    UngrabFeature.mc.mouseHelper = new MouseHelper() {
+    FarmingUtils.mc.inGameHasFocus = true;
+    FarmingUtils.mc.mouseHelper = new MouseHelper() {
       public void mouseXYChange() { }
 
       public void grabMouseCursor() {
@@ -45,15 +42,12 @@ public class UngrabFeature {
     if (!UngrabFeature.isUngrabbed) return;
 
     UngrabFeature.isUngrabbed = false;
-    UngrabFeature.mc.mouseHelper = UngrabFeature.oldMouseHelper;
-    if (!UngrabFeature.doesGameWantUngrab) {
-      UngrabFeature.mc.mouseHelper.grabMouseCursor();
-    }
+    FarmingUtils.mc.mouseHelper = UngrabFeature.oldMouseHelper;
+    if (!UngrabFeature.doesGameWantUngrab) FarmingUtils.mc.mouseHelper.grabMouseCursor();
     UngrabFeature.oldMouseHelper = null;
   }
 
   static {
-    UngrabFeature.mc = Minecraft.getMinecraft();
     UngrabFeature.isUngrabbed = false;
     UngrabFeature.doesGameWantUngrab = true;
   }
