@@ -29,7 +29,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 public class FarmingUtils {
   public static final String MODID = "farmingutils";
   public static final String NAME = "FarmingUtils";
-  public static final String VERSION = "1.1.4";
+  public static final String VERSION = "2.0.0";
 
   public static GuiScreen displayScreen;
   public static final Minecraft mc;
